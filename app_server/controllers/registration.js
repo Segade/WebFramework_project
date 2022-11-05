@@ -17,97 +17,48 @@ title: 'Log In'
 };
  
 // Events page 
+const _renderEvents = function(req, res){
+res.render('events', {
+title: 'Events', 
+pageHeader: {
+title: 'Events',
+strapline: 'Find all our events scheduled for you!'
+},
+sidebar: "Pick the events that you are interested the most. Lokking forward to seeing you!",
+event: responseBody 
+});
+}; // end render events
+ 
 
 const events = function(req, res){
-res.render('events', { 
-title: 'Events' ,
- 
- event: [{
-name: 'Ghaelach Football',
-hour: '12:30',
-day: '01/DIC/2022',
-location: 'Austin Stacks Park',
-town: 'Tralee'
-}
-,
-{
-name: 'Hurling',
-hour: '13:30',
-day: '02/DIC/2022',
-location: 'Fitzgerald Stadium',
-town: 'Killarney'
-}
-,
-{
-name: 'Golf',
-hour: '10:00',
-day: '01/DIC/2022',
-location: 'Tralee Golf Club',
-town: 'Barrow'
-}
-,
-{
-name: 'Athletics',
-hour: '11:45',
-day: '03/DIC/2022',
-location: 'Castleisland Athletics Club',
-town: 'Castleislande'
-}
-,
-{
-name: 'Swimming',
-hour: '16:00',
-day: '02/DIC/2022',
-location: 'Tralee Sports Complex',
-town: 'Tralee'
-}
-,
-{
-name: 'Theatre',
-hour: '20:00',
-day: '01/DIC/2022',
-location: 'Siamsa Tire, Tralee',
-town: 'Tralee'
-}
-,
-{
-name: 'Irish dancing',
-hour: '21:00',
-day: '02/DIC/2022',
-location: 'Ardfert Community Center',
-town: 'Ardfert'
-},
+const path = '/api/events'; 
+const requestOptions = { 
+url : apiOptions.server + path, 
+method : 'GET', 
+json : {}, 
+/*
+qs : { 
+lng : -0.9690884, 
+lat : 51.455041, 
+maxDistance : 20 
+} 
+*/
+}; 
+request(requestOptions, (err, response, body) => { 
+_renderEvents(req, res); 
+} 
+);
+}; // end events
 
-{
-name: 'Salsa dancing',
-hour: '21:30',
-day: '01/DIC/2022',
-location: 'Kilflynn Community Center',
-town: 'Kilflynne'
+request(
+requestOptions,function(err, response, body) {
+_renderEvents(req, res, body); 
 }
-,
-{
-name: 'Art Classes',
-hour: '18:30',
-day: '03/DIC/2022',
-location: 'Ardfert Community Center',
-town: 'Ardfert'
-}
-,
-{
-name: 'Opera',
-hour: '20:00',
-day: '02/DIC/2022',
-location: 'Cork Opera House',
-town: 'Cork'
-}
+);
 
 
 
-]
-});
-};
- 
+
 
 
 

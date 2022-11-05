@@ -1,7 +1,7 @@
  
 
 const mongoose = require('mongoose');
-const dbURI = "mongodb+srv://secaiv:A1kalina@cluster0.hwsu78d.mongodb.net/Locator?retryWrites=true&w=majority";
+const dbURI = "mongodb+srv://secaiv:A1kalina@cluster0.hwsu78d.mongodb.net/events?retryWrites=true&w=majority";
 
 try {
    

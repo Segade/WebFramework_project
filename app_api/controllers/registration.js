@@ -9,22 +9,12 @@ res
 .json({"status" : "success"});
 };
 
-/*
-const eventsRead = function(req, res) {
-event
-	.findById(req.params.eventid) 
-	.exec((err, event) => { 
-		res 
-			.status(200) 
-			.json(event); 
-	});
-};
-*/
+ 
 /////
 const eventsRead = function (req, res) {
-  if (req.params && req.params.objectid) {  
+  if (req.params && req.params.eventid) {  
     event
-      .findById(req.params.object)
+      .findById(req.params.eventid)
       .exec((err, event) => {
         if (!event) {
           res	
@@ -52,7 +42,33 @@ const eventsRead = function (req, res) {
   }
 };
 
+const eventCreate = function(req, res) {
+event.create({ 
+name: req.body.name,
+hour: req.body.hour,
+day: req.body.day,
+town: req.body.town
+},
+(err, event) => { 
+if (err) {
+res
+.status(400)
+.json(err);
+} else {
+res
+.status(201)
+.json(event);
+}
+});
+};
 
+
+
+
+
+
+
+// members
 const memberCreate = function(req, res) {
 member.create({ 
 name: req.body.name,
@@ -81,6 +97,7 @@ res
 module.exports = {
 eventsList, 
  eventsRead, 
+eventCreate,
 memberCreate
 
 } ;
