@@ -3,10 +3,14 @@ const event = mongoose.model('events');
 
 
  
-const eventsList = function (req, res) { 
-res
-.status(200)
-.json({"status" : "success"});
+const eventsList = function(req, res) {
+event
+	.find() 
+	.exec((err, event) => { 
+		res 
+			.status(200) 
+			.json(event); 
+	});
 };
 
  

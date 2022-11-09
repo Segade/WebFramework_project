@@ -9,7 +9,7 @@ router
 
 router
   .route('/events')
-  .get(ctrlRegistration.eventsRead)
+  .get(ctrlRegistration.eventsList)
   .post(ctrlRegistration.eventCreate);
 
 

@@ -7,7 +7,7 @@ var logger = require('morgan');
 
 //require('./app_server/models/db');
 require('./app_api/models/db');
-//var indexRouter = require('./routes/index');
+ var indexRouter = require('./app_server/routes/index');
 //var usersRouter = require('./routes/users');
 // const indexRouter = require('./app_server/routes/index');
 
@@ -30,8 +30,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/', indexRouter);
-app.use('/api', apiRoutes);
+  app.use('/', indexRouter);
+//app.use('/api', apiRoutes);
 
 //app.use('/users', usersRouter);
 
