@@ -1,15 +1,16 @@
 const mongoose = require('mongoose');
-const event = mongoose.model('events');
-
+const event = mongoose.model('Event');
+ 
 
  
 const eventsList = function(req, res) {
+	console.log('in eventsList');
 event
 	.find() 
-	.exec((err, event) => { 
+	.exec((err, ev) => { 
 		res 
 			.status(200) 
-			.json(event); 
+			.json(ev); 
 	});
 };
 
@@ -19,8 +20,8 @@ const eventsRead = function (req, res) {
   if (req.params && req.params.eventid) {  
     event
       .findById(req.params.eventid)
-      .exec((err, event) => {
-        if (!event) {
+      .exec((err, ev) => {
+        if (!ev) {
           res	
             .status(404) 
             .json({	
@@ -35,7 +36,7 @@ const eventsRead = function (req, res) {
         }
         res		
           .status(200)
-          .json(event);
+          .json(ev);
       });
   } else {		
     res		
@@ -51,9 +52,10 @@ event.create({
 name: req.body.name,
 hour: req.body.hour,
 day: req.body.day,
+location: req.body.location,
 town: req.body.town
 },
-(err, event) => { 
+(err, ev) => { 
 if (err) {
 res
 .status(400)
@@ -61,7 +63,7 @@ res
 } else {
 res
 .status(201)
-.json(event);
+.json(ev);
 }
 });
 };
@@ -72,36 +74,12 @@ res
 
 
 
-// members
-const memberCreate = function(req, res) {
-member.create({ 
-name: req.body.name,
-surname: req.body.surname,
-address: req.body.address,
-phone: req.body.phone,
-email: req.body.email,
-password: req.body.password,
-
-}, (err, member) => { 
-if (err) {
-res
-.status(400)
-.json(err);
-} else {
-res
-.status(201)
-.json(member);
-}
-});
-};
-
-
-
+ 
 
 module.exports = {
 eventsList, 
  eventsRead, 
-eventCreate,
-memberCreate
+eventCreate
+ 
 
 } ;

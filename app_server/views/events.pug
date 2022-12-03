@@ -9,17 +9,11 @@ br
 p
   | Select and register on the event you want to attend
 br
-table
-  tr
-    th  Name 
-    th  Hour 
-    th  Day 
-    th  Location 
-    th  Town 
-  each e in event
-    tr
-      td  #{e.name}
-      td  #{e.hour}
-      td  #{e.day}
-      td  #{e.location}
-      td  #{e.town}
+
+app-events Loading
+
+
+block scripts 
+  script(src='/build/runtime.23a3ddd7ef4ebdb2.js')
+  script(src='/build/polyfills.d9946f31cba37647.js')
+  script(src='/build/main.18c7585cda16fdf9.js')

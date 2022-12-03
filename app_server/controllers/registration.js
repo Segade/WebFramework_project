@@ -1,12 +1,12 @@
 const request = require('request');
-/*
+
 const apiOptions = { 
 server : 'http://localhost:3000' 
 }; 
 if (process.env.NODE_ENV === 'production') { 
-apiOptions.server = 'https://pure-temple-67771.herokuapp.com'; 
+apiOptions.server = 'your heroku application here'; 
 }
-
+/*
 const requestOptions = {
 url : 'http://yourapi.com/api/path', 
 method : 'GET', 
@@ -31,12 +31,20 @@ console.log(response.statusCode);
 */
 /* GET 'home' page */
 const homelist = function(req, res){
-res.render('registration', { 
+res.render('index', { 
 title: 'Home',
 
 });
  };
 
+
+// registration form
+const member = function(req, res){
+res.render('registration', { 
+title: 'Registration form',
+
+});
+};
 
    
 // log in page 
@@ -50,6 +58,7 @@ title: 'Log In'
 // Events page 
 
 const _renderEvents = function(req, res, responseBody){ 
+console.log(responseBody)
 res.render('events', {
 title: 'List of events',
 pageHeader: {
@@ -75,11 +84,13 @@ lat : 51.455041,
 maxDistance : 20 
 } 
 }; 
+console.log(requestOptions);
 request(requestOptions, (err, response, body) => { 
-_renderEvents(req, res); 
+_renderEvents(req, res, body); 
 } 
 );
 };
+
  
 
 
@@ -90,7 +101,9 @@ _renderEvents(req, res);
 
 module.exports = {
 homelist,
+member,
 login,
 events
+//events
 };
 

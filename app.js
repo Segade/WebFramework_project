@@ -3,10 +3,24 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+//
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var flash = require('connect-flash');
 
+
+// passport config
+var Account = require('./app_server/models/account');
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
 
 //require('./app_server/models/db');
 require('./app_api/models/db');
+require('./app_api/models/members');
+require('./app_api/models/events');
  var indexRouter = require('./app_server/routes/index');
 //var usersRouter = require('./routes/users');
 // const indexRouter = require('./app_server/routes/index');
@@ -29,9 +43,30 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'app_public')));
+//secret
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(require('express-session')({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(flash());
+app.use(passport.session());
+
+
+
+
+app.use('/api', function(req, res, next) {
+res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+next();
+});
 
   app.use('/', indexRouter);
-//app.use('/api', apiRoutes);
+app.use('/api', apiRoutes);
 
 //app.use('/users', usersRouter);
 

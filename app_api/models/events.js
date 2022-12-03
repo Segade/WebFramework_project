@@ -23,4 +23,4 @@ required: true
 }
 });
 
-mongoose.model('events', eventSchema);
+mongoose.model('Event', eventSchema);

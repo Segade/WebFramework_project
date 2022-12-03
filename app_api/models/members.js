@@ -5,7 +5,7 @@ name: String,
 surname: String,
 address: String,
 phone: String,
-email: String
+email: String,
 password: String,
 dob: {
 type: Date,
@@ -15,4 +15,4 @@ type: Date,
 
 
 
-mongoose.model('members', memberSchema);
+mongoose.model('Member', memberSchema);
