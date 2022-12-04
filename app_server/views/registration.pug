@@ -1,49 +1,16 @@
+extends layout
 
-head
-  title
-    | #{title}
-h1 Tralee Talent Event
-br
-h2 Sign Up
-br
-p
-  | Enter your details to sign up on the web app
-br
-table
-  tr
-    td Forename: 
-    td
-      input(type='text', title='forename')
-  tr
-    td Surname: 
-    td
-      input(type='text', title='surname')
-  tr
-    td Address: 
-    td
-      input(type='text', title='address')
-  tr
-    td Phone: 
-    td
-      input(type='text', title='phone')
-  tr
-    td E-mail: 
-    td
-      input(type='text', title='email')
-  tr
-    td Password: 
-    td
-      input(type='password', title='password')
-  tr
-    td Date of Birth: 
-    td
-      select
-        option Day
-      | /
-      select
-        option Month
-      | /
-      select
-        option
-          | Year
-input(type='submit', value='Register')
+block content
+  .container
+    h1 Register Page
+    p.lead Say something worthwhile here.
+    br
+    form(role='form', action="/registration",method="post", style='max-width: 300px;')
+      .form-group
+          input.form-control(type='text', name="username", placeholder='Enter Username')
+      .form-group
+        input.form-control(type='password', name="password", placeholder='Password')
+      button.btn.btn-default(type='submit') Submit
+ 
+      a(href='/')
+        button.btn.btn-primary(type="button") Cancel

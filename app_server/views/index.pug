@@ -2,18 +2,22 @@
 head
   title
     |  #{title} 
-h1
-  a(href='./registration')
-    | Registration
 
 br
 
-h1
-  a(href='./login')
-    | Login Page
+if (!user)
+  h1
+    a(href='./login')  Login Page
+  br
+  h1
+    a(href='./registration') Registration
+  br
 
-br
+if (user)
+  p You are currently logged in as #{user.username}
+  a(href="/logout") Logout
+  br
+  h1
+    a(href='./events') List of Events
+ 
 
-h1
-  a(href='./events')
-    | List of Events

@@ -5,12 +5,7 @@ var router = express.Router();
 
 
 /* GET home page. */
-/* 
-router.get('/', function(req, res, next) {
-  res.render('registration', { title: 'Express' });
-});
-*/
- 
+
  
 const ctrlPage = require('../controllers/registration'); 
 
@@ -30,6 +25,34 @@ router.post('/login', passport.authenticate('local', { failureRedirect: '/login'
     });
 });
 
+// post for register
+router.post('/registration', (req, res, next) => {
+    Account.register(new Account({ username : req.body.username }), req.body.password, (err, account) => {
+        if (err) {
+          return res.render('register', { error : err.message });
+        }
+
+        passport.authenticate('local')(req, res, () => {
+            req.session.save((err) => {
+                if (err) {
+                    return next(err);
+                }
+                res.redirect('/');
+            });
+        });
+    });
+});
+
+//logout
+router.get('/logout', (req, res, next) => {
+    req.logout();
+    req.session.save((err) => {
+        if (err) {
+            return next(err);
+        }
+        res.redirect('/');
+    });
+});
 
 
 

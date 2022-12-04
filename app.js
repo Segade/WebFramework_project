@@ -44,6 +44,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app_public')));
+
 //secret
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -55,7 +56,6 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(flash());
 app.use(passport.session());
-
 
 
 

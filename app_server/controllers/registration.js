@@ -33,7 +33,7 @@ console.log(response.statusCode);
 const homelist = function(req, res){
 res.render('index', { 
 title: 'Home',
-
+ user : req.user 
 });
  };
 
@@ -51,6 +51,7 @@ title: 'Registration form',
  
 const login = function(req, res){
 res.render('login', { 
+user : req.user, error : req.flash('error'),
 title: 'Log In' 
 });
 };
