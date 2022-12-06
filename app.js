@@ -17,6 +17,21 @@ passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
+// SSL
+ 
+ var fs = require('fs');
+var http = require('http');
+var https = require('https');
+var privateKey  = fs.readFileSync('./sslcert/key.pem', 'utf8');
+var certificate = fs.readFileSync('./sslcert/cert.pem', 'utf8');
+var credentials = {key: privateKey, cert: certificate};
+const app = express();
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(credentials, app);
+httpServer.listen(8000);
+httpsServer.listen(443);
+ 
+
 //require('./app_server/models/db');
 require('./app_api/models/db');
 require('./app_api/models/members');
@@ -31,7 +46,7 @@ const apiRoutes = require('./app_api/routes/index');
 
 
 
-var app = express();
+//var app = express();
 
 // view engine setup
 //app.set('views', path.join(__dirname, 'views'));

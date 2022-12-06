@@ -45,7 +45,8 @@ router.post('/registration', (req, res, next) => {
 
 //logout
 router.get('/logout', (req, res, next) => {
-    req.logout();
+    req.session.destroy();
+        res.redirect('/');
     req.session.save((err) => {
         if (err) {
             return next(err);
